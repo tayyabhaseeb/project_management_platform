@@ -10,10 +10,13 @@ import CreateProjectForm from "./components/CreateProjectForm";
 import AddMemberForm from "./components/AddMemberForm";
 import TeamMembers from "./components/TeamMembers";
 import { MemberData, Project } from "./models/Project";
+import Footer from "./components/Footer";
+import NoProjects from "./components/NoProjects";
+import NoTeamMembers from "./components/NoTeamMembers";
 
 export default function App() {
   const [activeModal, setActiveModal] = useState<
-    "project" | "addMember" | "team" | null
+    "project" | "addMember" | "team" | "description" | null
   >(null);
 
   const [projects, setProjects] = useState<Project[]>([]);
@@ -46,16 +49,20 @@ export default function App() {
           Projects Summary
         </h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((obj, index) => (
-            <Card
-              key={index}
-              obj={obj}
-              setProjects={setProjects}
-              index={index}
-            />
-          ))}
-        </div>
+        {projects.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {projects.map((obj, index) => (
+              <Card
+                key={index}
+                obj={obj}
+                setProjects={setProjects}
+                index={index}
+              />
+            ))}
+          </div>
+        ) : (
+          <NoProjects />
+        )}
       </div>
 
       <Modal
@@ -85,12 +92,16 @@ export default function App() {
         isOpen={activeModal === "team"}
         onClose={() => setActiveModal(null)}
       >
-        {}
-        <TeamMembers
-          teamMembers={teamMembers}
-          setTeamMembers={setTeamMembers}
-        />
+        {teamMembers.length > 0 ? (
+          <TeamMembers
+            teamMembers={teamMembers}
+            setTeamMembers={setTeamMembers}
+          />
+        ) : (
+          <NoTeamMembers />
+        )}
       </Modal>
+      <Footer />
     </main>
   );
 }
