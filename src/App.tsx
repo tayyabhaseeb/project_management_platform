@@ -17,16 +17,7 @@ export default function App() {
         <ActionCard icon={<MdPersonAddAlt />} label={"Add New Members"} />
         <ActionCard icon={<GoPeople />} label={"Team Members"} />
       </div>
-      {/* <div className="bg-red-500 p-4">
-        <h2 className="text-center text-4xl">Projects Summary</h2>
-        <div>
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-        </div>
-      </div> */}
+
       <div className="p-4 min-h-screen">
         <h2 className="text-center text-4xl text-[#1e6352] mb-6">
           Projects Summary
