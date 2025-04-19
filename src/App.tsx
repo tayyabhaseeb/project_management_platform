@@ -45,7 +45,7 @@ export default function App() {
       </div>
 
       <div className="p-4 min-h-screen">
-        <h2 className="text-center text-4xl text-[#1e6352] mb-6">
+        <h2 className="text-center text-4xl text-[#1e6352] mt-6 mb-10">
           Projects Summary
         </h2>
 
