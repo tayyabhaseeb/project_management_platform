@@ -20,7 +20,9 @@ export interface ActionCardProps {
 export interface AddMemberProps {
   setTeamMembers: React.Dispatch<React.SetStateAction<MemberData[]>>;
   setActiveModal: React.Dispatch<
-    React.SetStateAction<"project" | "addMember" | "team" | null>
+    React.SetStateAction<
+      "project" | "addMember" | "team" | "description" | null
+    >
   >;
 }
 
@@ -28,6 +30,7 @@ export interface CardProps {
   obj: Project;
   setProjects: React.Dispatch<React.SetStateAction<Project[]>>;
   index: number;
+  onClick?: () => void;
 }
 
 export interface ProjectFormData {
@@ -40,7 +43,9 @@ export interface ProjectFormData {
 export interface NewProjectFormProps {
   setProjects: React.Dispatch<React.SetStateAction<Project[]>>;
   setActiveModal: React.Dispatch<
-    React.SetStateAction<"project" | "addMember" | "team" | null>
+    React.SetStateAction<
+      "project" | "addMember" | "team" | "description" | null
+    >
   >;
 }
 
@@ -54,4 +59,20 @@ export interface ModalProps {
 export interface TeamMembersProps {
   teamMembers: MemberData[];
   setTeamMembers: React.Dispatch<React.SetStateAction<MemberData[]>>;
+}
+
+export interface ProjectDescProps {
+  title: string;
+  desc: string;
+  date: string;
+  status: "Not Started" | "In Progress" | "Completed";
+  onStatusChange?: (
+    newStatus: "Not Started" | "In Progress" | "Completed"
+  ) => void;
+}
+
+export interface EmptyStateProps {
+  title: string;
+  message: string;
+  actionText: string;
 }
