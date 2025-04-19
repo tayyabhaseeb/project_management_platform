@@ -1,5 +1,3 @@
-import React from "react";
-
 function Header() {
   return (
     <header className="flex h-24 bg-light-green">
