@@ -1,14 +1,11 @@
 import { useState } from "react";
+import { NewProjectFormProps, ProjectFormData } from "../models/Project";
 
-interface FormData {
-  name: string;
-  description: string;
-  startDate: string;
-  status: "Not Started" | "In Progress" | "Completed";
-}
-
-const CreateProjectForm: React.FC = () => {
-  const [formData, setFormData] = useState<FormData>({
+const CreateProjectForm: React.FC<NewProjectFormProps> = ({
+  setProjects,
+  setActiveModal,
+}) => {
+  const [formData, setFormData] = useState<ProjectFormData>({
     name: "",
     description: "",
     startDate: "",
@@ -43,7 +40,7 @@ const CreateProjectForm: React.FC = () => {
     const hasErrors = Object.values(newErrors).some((msg) => msg !== "");
     if (hasErrors) return;
 
-    console.log("Submitted project:", formData);
+    setProjects((prev) => [...prev, formData]);
 
     setFormData({
       name: "",
@@ -51,6 +48,8 @@ const CreateProjectForm: React.FC = () => {
       startDate: "",
       status: "Not Started",
     });
+
+    setActiveModal(null);
   };
 
   return (

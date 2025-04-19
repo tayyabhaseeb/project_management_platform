@@ -1,10 +1,5 @@
 import React from "react";
-
-interface ActionCardProps {
-  icon: React.ReactNode;
-  label: string;
-  onClick?: () => void;
-}
+import { ActionCardProps } from "../models/Project";
 
 const ActionCard: React.FC<ActionCardProps> = ({ icon, label, onClick }) => {
   return (
