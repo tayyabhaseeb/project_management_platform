@@ -6,14 +6,18 @@ import ActionCard from "./components/ActionCard";
 import Card from "./components/Card";
 import Modal from "./components/Modal";
 import { useState } from "react";
-import CreateProject from "./components/CreateProjectForm";
+import CreateProjectForm from "./components/CreateProjectForm";
 import AddMemberForm from "./components/AddMemberForm";
 import TeamMembers from "./components/TeamMembers";
+import { MemberData, Project } from "./models/Project";
 
 export default function App() {
   const [activeModal, setActiveModal] = useState<
     "project" | "addMember" | "team" | null
   >(null);
+
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [teamMembers, setTeamMembers] = useState<MemberData[]>([]);
 
   return (
     <main className="flex flex-col">
@@ -43,11 +47,14 @@ export default function App() {
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+          {projects.map((obj, index) => (
+            <Card
+              key={index}
+              obj={obj}
+              setProjects={setProjects}
+              index={index}
+            />
+          ))}
         </div>
       </div>
 
@@ -56,7 +63,10 @@ export default function App() {
         isOpen={activeModal === "project"}
         onClose={() => setActiveModal(null)}
       >
-        <CreateProject />
+        <CreateProjectForm
+          setProjects={setProjects}
+          setActiveModal={setActiveModal}
+        />
       </Modal>
 
       <Modal
@@ -64,7 +74,10 @@ export default function App() {
         isOpen={activeModal === "addMember"}
         onClose={() => setActiveModal(null)}
       >
-        <AddMemberForm />
+        <AddMemberForm
+          setTeamMembers={setTeamMembers}
+          setActiveModal={setActiveModal}
+        />
       </Modal>
 
       <Modal
@@ -72,7 +85,11 @@ export default function App() {
         isOpen={activeModal === "team"}
         onClose={() => setActiveModal(null)}
       >
-        <TeamMembers />
+        {}
+        <TeamMembers
+          teamMembers={teamMembers}
+          setTeamMembers={setTeamMembers}
+        />
       </Modal>
     </main>
   );

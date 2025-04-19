@@ -1,12 +1,10 @@
 import { useState } from "react";
+import { AddMemberProps, MemberData } from "../models/Project";
 
-interface MemberData {
-  name: string;
-  email: string;
-  photo: File | string | null;
-}
-
-const AddMemberForm: React.FC = () => {
+const AddMemberForm: React.FC<AddMemberProps> = ({
+  setTeamMembers,
+  setActiveModal,
+}) => {
   const [formData, setFormData] = useState<MemberData>({
     name: "",
     email: "",
@@ -43,9 +41,11 @@ const AddMemberForm: React.FC = () => {
     const hasErrors = Object.values(newErrors).some((msg) => msg !== "");
     if (hasErrors) return;
 
-    console.log("Submitted member:", formData);
+    setTeamMembers((prev) => [...prev, formData]);
 
     setFormData({ name: "", email: "", photo: null });
+
+    setActiveModal(null);
   };
 
   return (
